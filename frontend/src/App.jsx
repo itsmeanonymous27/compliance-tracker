@@ -8,18 +8,18 @@ function App() {
   const [title, setTitle] = useState("");
 
   useEffect(() => {
-    axios.get("http://localhost:5000/clients")
+    axios.get("https://compliance-backend-1okb.onrender.com/clients")
       .then(res => setClients(res.data));
   }, []);
 
   const fetchTasks = (id) => {
     setSelectedClient(id);
-    axios.get(`http://localhost:5000/clients/${id}/tasks`)
+    axios.get(`https://compliance-backend-1okb.onrender.com/clients/${id}/tasks`)
       .then(res => setTasks(res.data));
   };
 
   const toggleStatus = (task) => {
-    axios.patch(`http://localhost:5000/tasks/${task.id}`, {
+    axios.patch(`https://compliance-backend-1okb.onrender.com/tasks/${task.id}`, {
       status: task.status === "Pending" ? "Completed" : "Pending"
     }).then(() => fetchTasks(selectedClient));
   };
@@ -27,7 +27,7 @@ function App() {
   const addTask = () => {
     if (!title) return;
 
-    axios.post("http://localhost:5000/tasks", {
+    axios.post("https://compliance-backend-1okb.onrender.com/tasks", {
       client_id: selectedClient,
       title,
       category: "General",
